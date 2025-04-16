@@ -1,4 +1,7 @@
 import { useState } from "react";
+import ciclou from "../assets/banner-ciclou.png";
+import condoview from "../assets/condoview-banner.png";
+import petlitoral from "../assets/petlitoral.png";
 
 const Portfolio = () => {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("Todos");
@@ -7,29 +10,27 @@ const Portfolio = () => {
 
   const projetos = [
     {
-      titulo: "Travel",
+      titulo: "CondoView",
       descricao:
-        "Site de busca de voos baratos",
-      imagem:
-        "https://images.unsplash.com/photo-1581091870622-6f6e1b0b0e4e?auto=format&fit=crop&w=800&q=80",
+        "Condoview é um app que busca facilitar a administração do condomínio oferecendo benefícios ao administrador e morador.",
+      imagem: condoview,
       link: "https://exemplo.com/plataforma-educacional",
-      categoria: "Web",
+      categoria: "Mobile",
     },
     {
       titulo: "Ciclou - Coleta de Óleo",
       descricao:
-        "Aplicativo mobile que visa juntar a pessoa que quer com a que precisa da coleta.",
-      imagem:
-        "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&w=800&q=80",
-      link: "https://exemplo.com/app-delivery",
+        "Um aplicativo que busca conectar coletores e solicitantes que desejam descartar seu óleo de cozinha usado.",
+      imagem: ciclou, 
+      link: "https://play.google.com/store/apps/details?id=com.beyondsystem.ciclou_novo_app&hl=pt_BR",
       categoria: "Mobile",
     },
     {
       titulo: "Pet Litoral",
-      descricao: "Site feito para agendamendo de banho e tosa.",
-      imagem:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
-      link: "https://exemplo.com/site-institucional",
+      descricao:
+        "Site feito para agendamento de banho e tosa feito para o pet shop Pet Litoral.",
+      imagem: petlitoral,
+      link: "https://petlitoral.shop",
       categoria: "Web",
     },
   ];
@@ -40,23 +41,26 @@ const Portfolio = () => {
       : projetos.filter((p) => p.categoria === categoriaSelecionada);
 
   return (
-    <section className="bg-black text-white py-20 px-6" id="portfolio">
+    <section
+      className="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-20 px-6"
+      id="portfolio"
+    >
       <div className="max-w-6xl mx-auto text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">Nosso Portfólio</h2>
         <p className="text-gray-400 text-lg">
           Conheça alguns dos projetos que tivemos orgulho de desenvolver.
         </p>
 
-        <div className="flex justify-center gap-4 mt-6">
+        <div className="flex justify-center gap-4 mt-6 flex-wrap">
           {categorias.map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoriaSelecionada(cat)}
-              className={`px-4 py-2 rounded-full border ${
+              className={`px-5 py-2 rounded-full border text-sm font-medium transition-all duration-300 ${
                 categoriaSelecionada === cat
-                  ? "bg-blue-600 text-white"
-                  : "border-gray-600 text-gray-300 hover:bg-gray-800"
-              } transition-colors`}
+                  ? "bg-blue-500 text-white"
+                  : "border-gray-600 text-gray-300 hover:bg-gray-700"
+              }`}
             >
               {cat}
             </button>
@@ -64,31 +68,29 @@ const Portfolio = () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
         {projetosFiltrados.map((projeto, index) => (
           <div
             key={index}
-            className="bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300"
+            className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl transform hover:-translate-y-1 hover:shadow-2xl transition duration-300"
           >
             <img
               src={projeto.imagem}
               alt={projeto.titulo}
-              className="w-full h-56 object-cover"
+              className="w-full h-48 object-cover"
             />
-            <div className="p-6 flex flex-col justify-between h-full">
-              <div>
-                <h3 className="text-2xl font-semibold mb-2">
-                  {projeto.titulo}
-                </h3>
-                <p className="text-gray-300 text-sm">{projeto.descricao}</p>
-              </div>
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-white mb-2">
+                {projeto.titulo}
+              </h3>
+              <p className="text-gray-400 text-sm mb-4">{projeto.descricao}</p>
               <a
                 href={projeto.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-6 bg-blue-600 hover:bg-blue-700 transition-colors text-white text-sm font-medium px-4 py-2 rounded-full"
+                className="inline-block mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-300"
               >
-                Ver projeto
+                Ver Projeto
               </a>
             </div>
           </div>
