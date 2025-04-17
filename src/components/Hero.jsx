@@ -1,4 +1,4 @@
-import mockup from "../assets/pc.png";
+import mockup from "../assets/mockup_app3.png";
 import {
   FaEnvelope,
   FaBriefcase,
@@ -16,6 +16,7 @@ const scrollToSection = (id) => {
 const Hero = () => {
   return (
     <section
+      id="inicio"
       role="region"
       aria-label="Seção principal do site - Hero"
       className="relative min-h-screen flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20 px-6 md:px-20 py-12 bg-gradient-to-br from-black via-gray-900 to-gray-800 overflow-hidden"

@@ -13,64 +13,81 @@ const Contact = () => {
     emailjs
       .sendForm(
         "service_pb27koh",
-        "template_hkm90jx", 
+        "template_hkm90jx",
         formRef.current,
-        "6-T-Tod7BbpuzvopL" 
+        "6-T-Tod7BbpuzvopL"
       )
       .then(
-        (result) => {
+        () => {
           setStatus("sucesso");
           formRef.current.reset();
         },
         (error) => {
-          setStatus("erro");
           console.error("Erro:", error);
+          setStatus("erro");
         }
       );
   };
 
   return (
     <section
-      className="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-24 px-6"
       id="contato"
+      className="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-16 px-4 sm:px-6 lg:px-8"
     >
-      <div className="max-w-6xl mx-auto text-center mb-16">
+      <div className="max-w-5xl mx-auto text-center mb-12 px-4 sm:px-0">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
           Entre em Contato
         </h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          Tem um projeto em mente ou apenas quer bater um papo? Nossa equipe
-          está pronta para ajudar você a ir além do código.
+        <p className="text-gray-400 text-lg">
+          Tem um projeto em mente ou apenas quer bater um papo? Nossa equipe está pronta para ajudar você a ir além do código.
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-        <div className="bg-gray-800 p-10 rounded-2xl shadow-2xl">
-          <h3 className="text-2xl font-semibold text-center mb-8">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-4 sm:px-0">
+        <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl animate-fade-in">
+          <h3 className="text-2xl font-semibold text-center mb-6">
             Envie uma Mensagem
           </h3>
-          <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
-            <input
-              type="text"
-              name="nome"
-              placeholder="Seu Nome"
-              className="w-full p-4 bg-gray-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-400"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Seu E-mail"
-              className="w-full p-4 bg-gray-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-400"
-              required
-            />
-            <textarea
-              name="mensagem"
-              placeholder="Sua Mensagem"
-              className="w-full p-4 bg-gray-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-gray-400"
-              rows="5"
-              required
-            />
+          <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
+            <div className="flex flex-col">
+              <label htmlFor="nome" className="sr-only">
+                Seu Nome
+              </label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Seu Nome"
+                className="w-full p-4 bg-gray-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="email" className="sr-only">
+                Seu E-mail
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Seu E-mail"
+                className="w-full p-4 bg-gray-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="mensagem" className="sr-only">
+                Sua Mensagem
+              </label>
+              <textarea
+                id="mensagem"
+                name="mensagem"
+                placeholder="Sua Mensagem"
+                className="w-full p-4 bg-gray-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
+                rows="5"
+                required
+              />
+            </div>
 
             <input
               type="hidden"
@@ -85,71 +102,62 @@ const Contact = () => {
               Enviar Mensagem
             </button>
 
-            {status === "enviando" && (
-              <p className="text-sm text-blue-400 mt-2">Enviando...</p>
-            )}
-            {status === "sucesso" && (
-              <p className="text-sm text-green-400 mt-2">
-                Mensagem enviada com sucesso!
-              </p>
-            )}
-            {status === "erro" && (
-              <p className="text-sm text-red-400 mt-2">
-                Ocorreu um erro. Tente novamente.
-              </p>
-            )}
+            <div className="h-6">
+              {status === "enviando" && (
+                <p className="text-sm text-blue-400 mt-2">Enviando...</p>
+              )}
+              {status === "sucesso" && (
+                <p className="text-sm text-green-400 mt-2">
+                  Mensagem enviada com sucesso!
+                </p>
+              )}
+              {status === "erro" && (
+                <p className="text-sm text-red-400 mt-2">
+                  Ocorreu um erro. Tente novamente.
+                </p>
+              )}
+            </div>
           </form>
         </div>
 
-        <div className="grid gap-6">
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-xl hover:shadow-pink-600/30 transition-shadow duration-300">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 animate-fade-in">
+          {[
+            {
+              icon: <FaInstagram className="text-pink-500 text-3xl" />,
+              title: "Instagram",
+              desc: "Nos siga para ver nossos bastidores, projetos e novidades.",
+              href: "https://www.instagram.com/beyond_system",
+              hoverClass: "hover:shadow-pink-600/30",
+            },
+            {
+              icon: <FaWhatsapp className="text-green-500 text-3xl" />,
+              title: "WhatsApp",
+              desc: "Converse com nossa equipe diretamente pelo WhatsApp.",
+              href: "https://wa.me/5513988342378",
+              hoverClass: "hover:shadow-green-500/30",
+            },
+            {
+              icon: <FaEnvelope className="text-blue-400 text-3xl" />,
+              title: "E-mail",
+              desc: "Envie sua dúvida ou proposta por e-mail a qualquer momento.",
+              href: "mailto:beyond.business.tech@gmail.com",
+              hoverClass: "hover:shadow-blue-400/30",
+            },
+          ].map((item, idx) => (
             <a
-              href="https:/www.instagram.com/beyond_system"
+              key={idx}
+              href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4"
+              className={`flex items-center gap-4 p-6 bg-gray-800 rounded-2xl shadow-xl transition-shadow duration-300 ${item.hoverClass}`}
             >
-              <FaInstagram className="text-pink-500 text-4xl" />
+              {item.icon}
               <div>
-                <h4 className="text-xl font-semibold">Instagram</h4>
-                <p className="text-gray-400 text-sm">
-                  Nos siga para ver nossos bastidores, projetos e novidades.
-                </p>
+                <h4 className="text-xl font-semibold text-white">{item.title}</h4>
+                <p className="text-gray-400 text-sm">{item.desc}</p>
               </div>
             </a>
-          </div>
-
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-xl hover:shadow-green-500/30 transition-shadow duration-300">
-            <a
-              href="https://wa.me/5513988342378"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4"
-            >
-              <FaWhatsapp className="text-green-500 text-4xl" />
-              <div>
-                <h4 className="text-xl font-semibold">WhatsApp</h4>
-                <p className="text-gray-400 text-sm">
-                  Converse com nossa equipe diretamente pelo WhatsApp.
-                </p>
-              </div>
-            </a>
-          </div>
-
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-xl hover:shadow-blue-400/30 transition-shadow duration-300">
-            <a
-              href="mailto:beyond.business.tech@gmail.com"
-              className="flex items-center gap-4"
-            >
-              <FaEnvelope className="text-blue-400 text-4xl" />
-              <div>
-                <h4 className="text-xl font-semibold">E-mail</h4>
-                <p className="text-gray-400 text-sm">
-                  Envie sua dúvida ou proposta por e-mail a qualquer momento.
-                </p>
-              </div>
-            </a>
-          </div>
+          ))}
         </div>
       </div>
     </section>
