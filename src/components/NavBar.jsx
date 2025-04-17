@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-scroll";
+import logo from "../assets/b.png";
 
 const navItems = [
   { label: "Início", to: "inicio" },
   { label: "Sobre", to: "sobre" },
   { label: "Portifólio", to: "portfolio" },
+  { label: "Serviços", to: "servicos" },
   { label: "Equipe", to: "equipe" },
   { label: "Contato", to: "contato" },
 ];
@@ -26,6 +28,11 @@ const Navbar = () => {
             className="flex items-center space-x-2 focus:outline-none"
             aria-label="Voltar ao topo"
           >
+            <img
+              src={logo}
+              alt="Logo Beyond"
+              className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+            />
             <span className="text-2xl font-bold text-white">Beyond</span>
           </button>
 
@@ -57,11 +64,12 @@ const Navbar = () => {
       </header>
 
       <div
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 bg-black bg-opacity-90 backdrop-blur-sm transition-opacity duration-300 ease-in-out ${
-          menuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 bg-black bg-opacity-90 backdrop-blur-sm transform transition-all duration-300 ease-in-out
+          ${
+            menuOpen
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-full pointer-events-none"
+          }`}
         aria-label="Menu mobile"
       >
         {navItems.map((item) => (
@@ -74,6 +82,7 @@ const Navbar = () => {
             {item.label}
           </a>
         ))}
+
         <button
           onClick={() => setMenuOpen(false)}
           className="absolute top-6 right-6 text-white focus:outline-none transition-transform duration-200 hover:scale-110"
